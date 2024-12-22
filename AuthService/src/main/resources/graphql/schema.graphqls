@@ -1,0 +1,39 @@
+# 用户类型定义
+type User {
+  id: ID!
+  username: String!
+}
+
+# 认证结果类型
+type AuthPayload {
+  accessToken: String!
+  user: User!
+}
+
+# 登录输入类型
+input LoginInput {
+  username: String!
+  password: String!
+}
+
+# 注册输入类型
+input RegisterInput {
+  username: String!
+  password: String!
+}
+
+# 查询操作
+type Query {
+  # 获取当前登录用户信息
+  me: User
+}
+
+# 修改操作
+type Mutation {
+  # 用户登录
+  login(input: LoginInput!): AuthPayload!
+  # 用户注册
+  register(input: RegisterInput!): AuthPayload!
+  # 用户登出
+  logout: Boolean!
+}

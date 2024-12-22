@@ -1,0 +1,40 @@
+server:
+  port: 8080
+
+spring:
+  application:
+    name: auth-service
+  datasource:
+    url: jdbc:mysql://localhost:3306/ticdocs?serverTimezone=Asia/Shanghai&verifyServerCertificate=false&useSSL=false
+    username: root
+    password: root
+    driver-class-name: com.mysql.cj.jdbc.Driver
+  graphql:
+    graphiql:
+      enabled: true # 开发环境启用GraphiQL工具
+    schema:
+      printer:
+        enabled: true
+    cors:
+      allowed-origins: "*"
+      allowed-methods: "*"
+      allowed-headers: "*"
+  redis:
+    host: localhost
+    port: 6379
+    database: 0
+
+mybatis:
+  mapper-locations: classpath:mybatis/*.xml
+  type-aliases-package: com.doc.auth.model
+  configuration:
+    map-underscore-to-camel-case: true
+
+security:
+  jwt:
+    secret: TicDocs
+    access-token-expire: 3600000 # 1小时
+    refresh-token-expire: 43200000 # 12小时
+  token-prefix: "Bearer " # 7个字符
+  header-auth: "Authorization"
+  refresh-token-cookie: "refresh_token"
