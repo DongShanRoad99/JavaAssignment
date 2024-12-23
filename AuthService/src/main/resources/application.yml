@@ -19,10 +19,11 @@ spring:
       allowed-origins: "*"
       allowed-methods: "*"
       allowed-headers: "*"
-  redis:
-    host: localhost
-    port: 6379
-    database: 0
+  data:
+    redis:
+      host: localhost
+      port: 6379
+      database: 0
 
 mybatis:
   mapper-locations: classpath:mybatis/*.xml

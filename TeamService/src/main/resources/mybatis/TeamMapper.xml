@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.doc.team.mapper.TeamMapper">
+  <resultMap id="BaseResultMap" type="com.doc.team.model.Team">
+    <id column="id" jdbcType="BIGINT" property="id" />
+    <result column="teamname" jdbcType="VARCHAR" property="teamname" />
+    <result column="captainID" jdbcType="BIGINT" property="captainid" />
+  </resultMap>
+  <!--
+        创建团队。
+        插入一条新的记录到teams表中，并返回生成的团队ID。
+    -->
+  <insert id="createTeam" useGeneratedKeys="true" keyProperty="id">
+    INSERT INTO teams (teamname, captainID)
+    VALUES (#{teamname}, #{captainID})
+  </insert>
+
+  <!--
+      添加成员到指定的团队。
+      向team_members表中插入一条新的记录，表示某个用户成为了某个团队的一员。
+  -->
+  <insert id="addMemberToTeam">
+    INSERT INTO team_members (teamID, memberID)
+    VALUES (#{teamID}, #{memberID})
+  </insert>
+
+  <!--
+      从团队中删除成员。
+      移除team_members表中的相应记录，表示某用户不再属于某个团队。
+  -->
+  <delete id="deleteMemberFromTeam">
+    DELETE FROM team_members
+    WHERE teamID=#{teamID} AND memberID=#{memberID}
+  </delete>
+</mapper>
