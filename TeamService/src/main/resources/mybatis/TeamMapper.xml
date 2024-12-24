@@ -5,14 +5,32 @@
     <id column="id" jdbcType="BIGINT" property="id" />
     <result column="teamname" jdbcType="VARCHAR" property="teamname" />
     <result column="captainID" jdbcType="BIGINT" property="captainid" />
+    <result column="parentTeamID" jdbcType="BIGINT" property="parentteamid" />
   </resultMap>
+  <!--
+        根据团队ID获取团队信息。
+        参数：
+            - id: 团队的唯一标识符。
+        返回值：
+            包含团队详细信息的对象，如果找不到则返回null。
+    -->
+  <select id="getTeamById" parameterType="long" resultType="com.doc.team.model.Team">
+    SELECT
+      id,
+      teamname,
+      captainID,
+      parentTeamID
+    FROM teams
+    WHERE id = #{id}
+  </select>
+
   <!--
         创建团队。
         插入一条新的记录到teams表中，并返回生成的团队ID。
     -->
   <insert id="createTeam" useGeneratedKeys="true" keyProperty="id">
-    INSERT INTO teams (teamname, captainID)
-    VALUES (#{teamname}, #{captainID})
+    INSERT INTO teams (teamname, captainID, parentTeamID)
+    VALUES (#{teamname}, #{captainID}, #{parentTeamID})
   </insert>
 
   <!--

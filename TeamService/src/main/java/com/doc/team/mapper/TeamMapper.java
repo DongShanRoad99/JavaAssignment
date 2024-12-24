@@ -1,21 +1,28 @@
 package com.doc.team.mapper;
 
 import com.doc.team.model.Team;
-import org.apache.ibatis.annotations.Mapper;
-import org.apache.ibatis.annotations.Options;
-import org.apache.ibatis.annotations.Param;
+import org.apache.ibatis.annotations.*;
 
 /**
  * 团队相关的数据库操作接口。
  */
 @Mapper
 public interface TeamMapper {
+
+    /**
+     * 根据团队ID获取团队信息。
+     *
+     * @param id 团队的唯一标识符。
+     * @return 包含团队详细信息的对象，如果找不到则返回null。
+     */
+    Team getTeamById(@Param("id") Long id);
+
     /**
      * 创建一个新的团队并设置队长。
      * <p>
      * 该方法会在teams表中插入一条新的记录，并返回生成的团队ID。
      *
-     * @param team 要插入的团队对象。
+     * @param team 接收要创建的队伍信息，不包括id。
      */
     @Options(useGeneratedKeys = true, keyProperty = "id")
     void createTeam(Team team);

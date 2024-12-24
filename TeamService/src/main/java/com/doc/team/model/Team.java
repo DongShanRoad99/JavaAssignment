@@ -13,11 +13,14 @@ public class Team implements Serializable {
 
     private Long captainID;
 
+    private Long parentTeamID;
+
     private static final long serialVersionUID = 1L;
 
-    public Team(String teamname, Long captainid) {
+    public Team(String teamname, Long captainID, Long parentTeamID) {
         this.teamname = teamname;
-        this.captainID = captainid;
+        this.captainID = captainID;
+        this.parentTeamID = parentTeamID;
     }
 
     public Long getId() {
@@ -36,12 +39,20 @@ public class Team implements Serializable {
         this.teamname = teamname;
     }
 
-    public Long getCaptainid() {
+    public Long getCaptainID() {
         return captainID;
     }
 
-    public void setCaptainid(Long captainid) {
-        this.captainID = captainid;
+    public void setCaptainID(Long captainID) {
+        this.captainID = captainID;
+    }
+
+    public Long getParentTeamID() {
+        return parentTeamID;
+    }
+
+    public void setParentTeamID(Long parentTeamID) {
+        this.parentTeamID = parentTeamID;
     }
 
     @Override
@@ -58,7 +69,8 @@ public class Team implements Serializable {
         Team other = (Team) that;
         return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
             && (this.getTeamname() == null ? other.getTeamname() == null : this.getTeamname().equals(other.getTeamname()))
-            && (this.getCaptainid() == null ? other.getCaptainid() == null : this.getCaptainid().equals(other.getCaptainid()));
+            && (this.getCaptainID() == null ? other.getCaptainID() == null : this.getCaptainID().equals(other.getCaptainID()))
+            && (this.getParentTeamID() == null ? other.getParentTeamID() == null : this.getParentTeamID().equals(other.getParentTeamID()));
     }
 
     @Override
@@ -67,7 +79,8 @@ public class Team implements Serializable {
         int result = 1;
         result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
         result = prime * result + ((getTeamname() == null) ? 0 : getTeamname().hashCode());
-        result = prime * result + ((getCaptainid() == null) ? 0 : getCaptainid().hashCode());
+        result = prime * result + ((getCaptainID() == null) ? 0 : getCaptainID().hashCode());
+        result = prime * result + ((getParentTeamID() == null) ? 0 : getParentTeamID().hashCode());
         return result;
     }
 
@@ -79,7 +92,8 @@ public class Team implements Serializable {
         sb.append("Hash = ").append(hashCode());
         sb.append(", id=").append(id);
         sb.append(", teamname=").append(teamname);
-        sb.append(", captainid=").append(captainID);
+        sb.append(", captainID=").append(captainID);
+        sb.append(", parentTeamID=").append(parentTeamID);
         sb.append(", serialVersionUID=").append(serialVersionUID);
         sb.append("]");
         return sb.toString();

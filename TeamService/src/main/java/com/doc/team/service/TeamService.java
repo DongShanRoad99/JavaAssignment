@@ -1,9 +1,18 @@
 package com.doc.team.service;
 
+import com.doc.team.model.Team;
+
 /**
  * 团队相关的业务逻辑接口。
  */
 public interface TeamService {
+    /**
+     * 根据团队ID获取团队信息。
+     *
+     * @param id 团队的唯一标识符。
+     * @return 包含团队详细信息的对象，如果找不到则返回null。
+     */
+    Team getTeamById(Long id);
 
     /**
      * 创建一个新的团队，并自动将队长加入到该团队。
@@ -13,7 +22,7 @@ public interface TeamService {
      * @param teamname 团队名称，不允许为空且必须唯一。
      * @param captainID 队长的用户ID，不能为空。
      */
-    void createTeamWithCaptain(String teamname, Long captainID);
+    void createTeamWithCaptain(String teamname, Long captainID, Long parentTeamID);
 
     /**
      * 添加成员到指定的团队。

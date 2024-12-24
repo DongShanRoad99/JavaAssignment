@@ -29,8 +29,9 @@ public class TeamController {
      * @return 成功创建后的响应信息。
      */
     @RequestMapping("/create")
-    public String createTeamWithCaptain(@RequestParam String teamname, @RequestParam Long captainID) {
-        teamService.createTeamWithCaptain(teamname, captainID);
+    public String createTeamWithCaptain(@RequestParam String teamname, @RequestParam Long captainID,
+                                        @RequestParam Long parentTeamID) {
+        teamService.createTeamWithCaptain(teamname, captainID, parentTeamID);
         return "Team created successfully with captain.";
     }
 

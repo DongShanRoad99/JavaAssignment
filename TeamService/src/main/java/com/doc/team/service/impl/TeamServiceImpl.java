@@ -21,6 +21,17 @@ public class TeamServiceImpl implements TeamService {
     }
 
     /**
+     * 根据团队ID获取团队信息。
+     *
+     * @param id 团队的唯一标识符。
+     * @return 包含团队详细信息的对象，如果找不到则返回null。
+     */
+    @Override
+    public Team getTeamById(Long id) {
+        return teamMapper.getTeamById(id);
+    }
+
+    /**
      * 创建一个新的团队，并自动将队长加入到该团队。
      * <p>
      * 此操作是原子性的，即要么团队和队长成员记录都成功创建，要么都不创建。
@@ -30,9 +41,9 @@ public class TeamServiceImpl implements TeamService {
      */
     @Override
     @Transactional
-    public void createTeamWithCaptain(String teamname, Long captainID) {
+    public void createTeamWithCaptain(String teamname, Long captainID, Long parentTeamID) {
         // 创建团队并获取生成的teamID
-        Team team = new Team(teamname, captainID);
+        Team team = new Team(teamname, captainID, parentTeamID);
         teamMapper.createTeam(team);
         System.out.println(team.getId());
         // 将队长作为成员加入到新创建的团队中
